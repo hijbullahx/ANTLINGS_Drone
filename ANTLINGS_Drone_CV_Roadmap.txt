@@ -1,97 +1,45 @@
 
-### 📝 ANTLINGS_Drone_CV_Roadmap.txt
+### 📝 ANTLINGS_Drone_CV_Roadmap.txt (UPDATED)
 
 **Project:** Drone-based Computer Vision Pipeline for ANTS Aerial Systems
 **Engineer:** Md. Taher Bin Omar Hijbullah
 **Deadline:** May 19, 2026
 
----
-
 ## 🏗️ PHASE 1: FOUNDATION & ENVIRONMENT (COMPLETED)
 
-* [x] **Step 1: Environment Architecture**
-* Decision: Hybrid Cloud/Local (Colab T4 GPU for training + VS Code/Git for version control).
+* [x] Step 1: Environment Architecture
+* [x] Step 2: Persistence Strategy
+* [x] Step 3: Dataset Ingestion
+* [x] Step 4: Data Sanity Check
+
+## 🚀 PHASE 2: MODEL STRATEGY & TRAINING (COMPLETED)
+
+* [x] Step 5: Model Selection (YOLOv26m)
+* [x] Step 6: Experiment Tracking (WandB)
+* [x] Step 7: Production Training (Achieved 0.46 mAP50, 82.4% on cars, 133 FPS inference speed).
+
+## 🧠 PHASE 3: THE "WINNING" PIPELINE (CURRENT)
+
+* [ ] **Step 8: Inference Pipeline Development (IN PROGRESS)**
+* Task: Build a custom OpenCV Python script that loads `best.pt` and processes drone video frames.
 
 
-* [x] **Step 2: Persistence Strategy**
-* Decision: Google Drive mounting for checkpointing to handle potential load shedding/disconnects.
+* [ ] Step 9: SAHI Integration (Bonus Feature)
+* [ ] Step 10: ByteTrack Integration
+* [ ] Step 11: Logic: Human & Vehicle Counting
 
+## 📊 PHASE 4: EVALUATION & OPTIMIZATION (FUTURE)
 
-* [x] **Step 3: Dataset Ingestion**
-* Action: VisDrone dataset uploaded and extracted to local Colab storage.
+* [ ] Step 12: Quantitative Analysis
+* [ ] Step 13: Qualitative Analysis
+* [ ] Step 14: Speed Benchmarking
 
+## 🏁 PHASE 5: SUBMISSION & PRESENTATION (FUTURE)
 
-* [x] **Step 4: Data Sanity Check**
-* Action: Visualized Ground Truth annotations with class labels to verify alignment.
+* [ ] Step 15: GitHub Organization
+* [ ] Step 16: Professional README
+* [ ] Step 17: Demo Video Production
+* [ ] Step 18: Final Code Review
 
-
-
-## 🚀 PHASE 2: MODEL STRATEGY & TRAINING (CURRENT)
-
-* [x] **Step 5: Model Selection**
-* Decision: **YOLOv26m (Medium)**. Chosen for the 2026-standard NMS-free architecture and STAL (Small-Target-Aware Labeling) to handle tiny aerial objects.
-
-
-* [x] **Step 6: Experiment Tracking**
-* Action: Integrated **Weights & Biases (WandB)** for professional metric logging.
-
-
-* [ ] **Step 7: Production Training (IN PROGRESS)**
-* Config: 50 Epochs, imgsz=640, batch=8 (optimized for T4 VRAM).
-* Goal: Achieve stable loss convergence and save `best.pt`.
-
-
-
-## 🧠 PHASE 3: THE "WINNING" PIPELINE (FUTURE)
-
-* [ ] **Step 8: Inference Pipeline Development**
-* Task: Build a Python script that loads the `best.pt` weights and processes video files.
-
-
-* [ ] **Step 9: SAHI Integration (Bonus Feature)**
-* Task: Implement **Slicing Aided Hyper Inference** to significantly boost mAP on tiny objects in high-resolution drone footage.
-
-
-* [ ] **Step 10: ByteTrack Integration**
-* Task: Add multi-object tracking (MOT) to ensure consistent IDs for cars/pedestrians.
-
-
-* [ ] **Step 11: Logic: Human & Vehicle Counting**
-* Task: Create a counting overlay that tracks "Total In Frame" and "Directional Crossings."
-
-
-
-## 📊 PHASE 4: EVALUATION & OPTIMIZATION
-
-* [ ] **Step 12: Quantitative Analysis**
-* Action: Extract mAP@50 and mAP@50-95 metrics from WandB.
-
-
-* [ ] **Step 13: Qualitative Analysis**
-* Action: Create a "Failure Case" gallery (Occlusion, low light) to demonstrate research thinking.
-
-
-* [ ] **Step 14: Speed Benchmarking**
-* Action: Calculate FPS for both standard inference and SAHI-based inference.
-
-
-
-## 🏁 PHASE 5: SUBMISSION & PRESENTATION
-
-* [ ] **Step 15: GitHub Organization**
-* Action: Clean directory structure (`/src`, `/models`, `/notebooks`, `/data_configs`).
-
-
-* [ ] **Step 16: Professional README**
-* Action: Write a "Research-First" README including architecture diagrams and performance tables.
-
-
-* [ ] **Step 17: Demo Video Production**
-* Action: Record a technical voiceover explaining the engineering decisions (like why we chose YOLOv26 over YOLOv11).
-
-
-* [ ] **Step 18: Final Code Review**
-* Action: Ensure all code is commented and PEP8 compliant.
-
-
+---
 
