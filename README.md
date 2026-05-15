@@ -6,7 +6,6 @@ A high-performance computer vision pipeline for autonomous aerial systems built 
 
 **Performance Metrics:**
 - **mAP50:** 0.46
-- **Accuracy (Cars):** 82.4%
 - **Inference Speed:** 133 FPS
 - **Model:** YOLOv26m (Ultralytics)
 
