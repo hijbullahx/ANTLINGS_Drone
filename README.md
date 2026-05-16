@@ -195,9 +195,4 @@ Visualization & Output (.mp4)
 
 ## 👨‍💻 Author
 
-**Md. Taher Bin Omar Hijbullah** *ANTS Aerial Systems – Autonomous Drone Assessment Project*
-
-## 📄 License
-
-This project is provided as-is for research and evaluation purposes.
-
+**Md. Taher Bin Omar Hijbullah** 
