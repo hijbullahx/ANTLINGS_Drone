@@ -1,4 +1,3 @@
-```markdown
 # 🚁 ANTLINGS Drone Computer Vision Pipeline
 
 **Autonomous Drone-Based Detection, Tracking & Counting System**
@@ -176,7 +175,7 @@ Visualization & Output (.mp4)
 
 ⚠️ **Model weights and high-res demo videos are too large for GitHub.**
 
-**🔗 [Download Weights & Demo Videos Here**](https://drive.google.com/drive/folders/1IyLGmpb3vxCB2ry_W58nrFfKULAvuiG3?usp=sharing)
+**🔗 [Download Weights & Demo Videos Here](https://drive.google.com/drive/folders/1IyLGmpb3vxCB2ry_W58nrFfKULAvuiG3?usp=sharing)**
 
 ## 🔧 Troubleshooting
 
@@ -194,10 +193,4 @@ Visualization & Output (.mp4)
 ## 📄 License
 
 This project is provided as-is for research and evaluation purposes.
-
-```
-
-```
-
-write the readme exactly like this
 
