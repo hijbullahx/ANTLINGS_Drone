@@ -2,7 +2,7 @@ dataset/
 .ipynb_checkpoints/
 __pycache__/
 *.pyc
-
+*.ini
 # Large model weights and video files
 *.pt
 *.mp4
