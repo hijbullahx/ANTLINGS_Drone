@@ -1,4 +1,4 @@
-# 🚁 ANTLINGS Drone Computer Vision Pipeline
+# ANTLINGS Drone Computer Vision Pipeline
 
 **Autonomous Drone-Based Detection, Tracking & Counting System**
 
@@ -8,6 +8,10 @@ A high-performance computer vision pipeline for autonomous aerial systems built 
 * **mAP@50:** 0.459
 * **Precision:** 0.570
 * **Recall:** 0.457
+
+## 🔗 Live Demo & Portfolio
+* **🌐 [View All AI/ML Projects](https://www.hijbullah.me/ai-ml)** – Explore my complete portfolio of AI/ML projects and research.
+* **🚀 [Try Drone Detection Live](https://hijbullahml.streamlit.app/Drone_Detection)** – Run the drone detection pipeline interactively on your own images/videos.
 
 ## ✨ Features
 * **High-Speed Real-Time Analytics:** Processes drone footage at 20-25 FPS using **YOLOv26m** and **ByteTrack** for persistent multi-object ID assignment.
