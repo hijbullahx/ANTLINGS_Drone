@@ -171,6 +171,13 @@ Visualization & Output (.mp4)
 
 ```
 
+## 🧠 Engineering & Problem Solving Analysis
+* **Dataset & Preprocessing:** The VisDrone 2019 dataset presents extreme scale variations. Instead of static image manipulation, this pipeline leverages YOLO's native PyTorch dataloader for dynamic, in-memory letterboxing, Mosaic augmentations, and HSV color-space shifts to ensure robustness against aerial lighting without storage bloat.
+* **Challenges Faced:** High-resolution 4K drone footage suffers from "data loss via downsampling," causing micro-objects (like background pedestrians) to vanish when resized to 640x640 for standard inference.
+* **System Strengths:** The pipeline offers a dual-capability engine. It can run high-speed real-time tracking (20-25 FPS) using ByteTrack, or it can be switched to SAHI mode to preserve pixel density and vastly increase recall for microscopic objects.
+* **System Limitations:** While SAHI solves the downsampling problem, the overlapping inference grids significantly reduce FPS, making it better suited for post-flight deep analytics rather than real-time edge deployment.
+
+
 ## 📥 Download Weights & Demo Videos
 
 ⚠️ **Model weights and high-res demo videos are too large for GitHub.**
