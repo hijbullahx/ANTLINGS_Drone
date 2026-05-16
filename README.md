@@ -12,6 +12,7 @@ A high-performance computer vision pipeline for autonomous aerial systems built 
 ## 🔗 Live Demo & Portfolio
 * **🌐 [View All AI/ML Projects](https://www.hijbullah.me/ai-ml)** – Explore my complete portfolio of AI/ML projects and research.
 * **🚀 [Try Drone Detection Live](https://hijbullahml.streamlit.app/Drone_Detection)** – Run the drone detection pipeline interactively on your own images/videos.
+* **📹 [Watch Demonstration Video](https://drive.google.com/file/d/18Mrn6OKyVyPTBtIqdTaGN7vH0Ge0HeEE/view?usp=sharing)** – Full pipeline demonstration with real-time tracking and zone counting.
 
 ## ✨ Features
 * **High-Speed Real-Time Analytics:** Processes drone footage at 20-25 FPS using **YOLOv26m** and **ByteTrack** for persistent multi-object ID assignment.
