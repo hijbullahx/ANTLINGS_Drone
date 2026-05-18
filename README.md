@@ -14,12 +14,49 @@ A high-performance computer vision pipeline for autonomous aerial systems built 
 * **🚀 [Try Drone Detection Live](https://hijbullahml.streamlit.app/Drone_Detection)** – Run the drone detection pipeline interactively on your own images/videos.
 * **📹 [Watch Demonstration Video](https://drive.google.com/file/d/18Mrn6OKyVyPTBtIqdTaGN7vH0Ge0HeEE/view?usp=sharing)** – Full pipeline demonstration with real-time tracking and zone counting.
 
-## ✨ Features
+## 📋 Antlings Assessment Execution
+
+This repository fulfills and exceeds the requirements for the Antlings AI/ML Technical Assessment. Below is the direct mapping of the implementation to the required tasks.
+
+### Task-01: Dataset Understanding & Preprocessing
+* **Dataset:** VisDrone 2019 (Official Benchmark for Drone-based Object Detection).
+* **Challenges Noticed:** High-altitude drone footage presents extreme scale variations, heavy occlusion, and "data loss via downsampling" where tiny objects (like background pedestrians) vanish at standard network resolutions.
+* **Class Structure:** Created a custom `.yaml` to explicitly map the 10 aerial classes, intentionally noting the split between `0: pedestrian` (walking) and `1: people` (sitting/riding).
+* **Preprocessing Approach:** Instead of writing static image manipulation scripts that cause storage bloat, this pipeline leverages YOLO's native PyTorch dataloader. During training, the engine dynamically applies in-memory letterboxing (to 640x640), Mosaic augmentations, and HSV color-space shifts to ensure robustness against aerial lighting changes.
+
+### Task-02: Model Training
+* **Architecture:** YOLOv26m (Medium). Chosen to balance parameter efficiency with real-time edge inference speed.
+* **Hardware:** Trained on an NVIDIA Tesla T4 GPU.
+* **Hyperparameters:** Trained for 50 epochs with a deliberate `batch=8` constraint to optimize memory usage and prevent OOM errors. 
+* *Note: Full training curves and confusion matrices are available in the `runs/yolo26m_visdrone_final-2/` directory.*
+
+### Task-03: Detection & Human Counting Logic
+* **Detection:** The pipeline successfully detects vehicles and humans with high precision.
+* **Counting Logic:** Upgraded from a simple tripwire to a **Dynamic Full-Frame Polygon Margin**. By establishing a 2-pixel mathematical border around the frame via the Solutions API, the system dynamically registers `IN` and `OUT` counts regardless of the input video resolution.
+* **Engineering Decision:** To satisfy the business requirement of a "Total Human Count," the pipeline natively aggregates both VisDrone human classes (`pedestrian` and `people`) into a unified metric.
+
+###  Task-04: Object Tracking (Bonus Feature)
+* **Implementation:** Integrated **ByteTrack** for persistent multi-object ID assignment.
+* **Impact:** This solves the fundamental issue of double-counting. Even under heavy occlusion or temporary frame loss, ByteTrack maintains the identity of vehicles and humans traversing the drone's field of view.
+
+###  Task-05: Evaluation, Visualization & Problem Solving
+**Performance Metrics (Epoch 50 Validation):**
+* **mAP@50:** `0.459`
+* **Precision:** `0.570`
+* **Recall:** `0.457`
+
+**Engineering Analysis (Strengths, Limitations & Challenges):**
+* **The Challenge:** Standard 640x640 inference fails to detect microscopic background objects in 4K aerial footage.
+* **The Solution (SAHI):** Integrated **Slicing Aided Hyper Inference (SAHI)**. The system mathematically slices the frame into overlapping grids, preserving native pixel density and drastically increasing recall.
+* **Strengths & Limitations Trade-off:** The pipeline acts as a dual-capability engine. Standard tracking runs highly efficiently at **20-25 FPS** for real-time edge deployment. Alternatively, switching to SAHI mode maximizes micro-detection accuracy but significantly reduces FPS, making it ideal for post-flight deep analytics.
+
+
+##  Features
 * **High-Speed Real-Time Analytics:** Processes drone footage at 20-25 FPS using **YOLOv26m** and **ByteTrack** for persistent multi-object ID assignment.
 * **Dynamic Zone Counting:** Utilizes the Ultralytics 8.4 Solutions API to create a responsive, full-frame polygon margin, accurately tracking objects entering and exiting the drone's field of view.
 * **High-Precision Micro-Detection (SAHI):** Integrates Slicing Aided Hyper Inference (SAHI) as an advanced capability to preserve pixel density and maximize recall for tiny, high-altitude objects that standard downsampling would miss.
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```text
 ANTLINGS_Drone_CV/
@@ -42,7 +79,7 @@ ANTLINGS_Drone_CV/
 │   └── yolo26m_visdrone_final-2/  # Final training run (best performance)
 │       ├── args.yaml              # Training configuration
 │       ├── weights/
-│       │   ├── best.pt            # ⭐ Best model weights
+│       │   ├── best.pt            #  Best model weights
 │       │   └── last.pt            # Last epoch weights
 │       ├── results.csv            # Training metrics
 │       ├── results.png            # Metrics visualization
@@ -67,7 +104,7 @@ ANTLINGS_Drone_CV/
 | `outputs/` | Stores inference results from running the pipeline on drone video inputs, including detection, tracking, and counting visualizations |
 | `dataset/` | Input drone video samples and dataset archives for model inference and validation |
 
-## 🚀 Installation & Usage
+##  Installation & Usage
 
 ### Prerequisites
 
@@ -151,7 +188,7 @@ The model was fine-tuned on the VisDrone 2019 dataset for 50 epochs using an NVI
 
 ```
 
-## 📦 Dependencies
+##  Dependencies
 
 * `ultralytics>=8.4.0`
 * `opencv-python>=4.8.0`
@@ -159,7 +196,7 @@ The model was fine-tuned on the VisDrone 2019 dataset for 50 epochs using an NVI
 * `lapx>=0.5.5`
 * `tqdm>=4.66.0`
 
-## 🎯 Features Pipeline
+##  Features Pipeline
 
 ```text
 Drone Video Input
@@ -176,16 +213,16 @@ Visualization & Output (.mp4)
 
 ```
 
-## 🧠 Engineering & Problem Solving Analysis
+##  Engineering & Problem Solving Analysis
 * **Dataset & Preprocessing:** The VisDrone 2019 dataset presents extreme scale variations. Instead of static image manipulation, this pipeline leverages YOLO's native PyTorch dataloader for dynamic, in-memory letterboxing, Mosaic augmentations, and HSV color-space shifts to ensure robustness against aerial lighting without storage bloat.
 * **Challenges Faced:** High-resolution 4K drone footage suffers from "data loss via downsampling," causing micro-objects (like background pedestrians) to vanish when resized to 640x640 for standard inference.
 * **System Strengths:** The pipeline offers a dual-capability engine. It can run high-speed real-time tracking (20-25 FPS) using ByteTrack, or it can be switched to SAHI mode to preserve pixel density and vastly increase recall for microscopic objects.
 * **System Limitations:** While SAHI solves the downsampling problem, the overlapping inference grids significantly reduce FPS, making it better suited for post-flight deep analytics rather than real-time edge deployment.
 
 
-## 📥 Download Weights & Demo Videos
+##  Download Weights & Demo Videos
 
-⚠️ **Model weights and high-res demo videos are too large for GitHub.**
+ **Model weights and high-res demo videos are too large for GitHub.**
 
 **🔗 [Download Weights & Demo Videos Here](https://drive.google.com/drive/folders/1IyLGmpb3vxCB2ry_W58nrFfKULAvuiG3?usp=sharing)**
 
